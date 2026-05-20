@@ -75,3 +75,44 @@ runas /netonly /user:YOURDOMAIN\USR1CV8 "powershell.exe -ExecutionPolicy Bypass 
 Перейдите на вкладку Совместимость.
 
 Поставьте галочку Запускать эту программу от имени администратора.
+
+## FileAssociation.psm1
+Модуль позволяет просматривать и устанавливать ассоциации для фалов для конкретного пользователя или для всей системы.
+
+### .SYNOPSIS
+    Модуль для просмотра и изменения файловых ассоциаций
+    на уровне системы (HKLM) и отдельных пользователей.
+	
+### DESCRIPTION
+
+    Содержит функции:
+        Get-FileAssociation      - просмотр ассоциаций
+        Set-FileAssociation      - изменение ассоциаций
+        Remove-FileAssociation   - удаление пользовательской ассоциации
+    Может работать с текущим пользователем, заданным по имени (через NTUSER.DAT)
+    и системными ассоциациями (HKLM).
+
+## owf.ps1
+	Этот модуль полезен при тестировании работы Word через DCOM
+
+### .SYNOPSIS
+    Opens a file in Microsoft Word via DCOM running as DOMAIN\USER.
+	
+###.DESCRIPTION
+    Creates COM object Word.Application (DCOM) and opens specified document.
+    IMPORTANT: run this script as user DOMAIN\USER.
+ 
+ .PARAMETER -FilePath
+    Full path to the file to open (e.g., C:\Docs\report.docx).
+
+ .PARAMETER -ComputerName
+    (Optional) Remote computer name where Word runs. If not specified, uses local machine.
+
+### EXAMPLE
+    .\owf.ps1 -FilePath "D:\Contracts\agreement.docx"
+    Opens file in local Word.
+
+    .\owf.ps1 -FilePath "\\server\share\doc.docx" -ComputerName "REMOTE-PC"
+    Opens file via DCOM on remote PC.
+
+
